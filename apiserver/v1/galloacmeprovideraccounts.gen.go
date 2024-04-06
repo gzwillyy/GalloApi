@@ -23,3 +23,15 @@ type GalloACMEProviderAccount struct {
 func (*GalloACMEProviderAccount) TableName() string {
 	return TableNameGalloACMEProviderAccount
 }
+
+type ACMEProvider struct {
+	Name           string `json:"name"  validate:"omitempty"`
+	Code           string `json:"code"  validate:"required,min=1,max=100"`
+	Description    string `json:"description"  validate:"omitempty"`
+	APIURL         string `json:"apiURL"  validate:"omitempty"`
+	TestAPIURL     string `json:"testAPIURL"  validate:"omitempty"`
+	RequireEAB     bool   `json:"requireEAB"  validate:"omitempty"`
+	EABDescription string `json:"eabDescription"  validate:"omitempty"`
+}
+
+

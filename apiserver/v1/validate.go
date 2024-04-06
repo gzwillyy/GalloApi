@@ -26,4 +26,8 @@ func (u *Admin) ValidateUpdate() field.ErrorList {
 	return allErrs
 }
 
-// other validate
+func (u *ACMEProvider) Validate() field.ErrorList {
+	val := validation.NewValidator(u)
+	allErrs := val.Validate()
+	return allErrs
+}
