@@ -4,14 +4,17 @@ import (
 	"fmt"
 	"time"
 
+	"gorm.io/gorm"
+
 	"github.com/gzwillyy/components/pkg/auth"
 	metav1 "github.com/gzwillyy/components/pkg/meta/v1"
 	"github.com/gzwillyy/components/pkg/util/idutil"
-	"gorm.io/gorm"
 )
 
+const TableNameGalloAdmins = "galloAdmins"
+
 // User represents a user restful resource. It is also used as gorm model.
-type User struct {
+type Admin struct {
 	// May add TypeMeta in the future.
 	// metav1.TypeMeta `json:",inline"`
 
@@ -33,13 +36,13 @@ type User struct {
 
 	IsAdmin int `json:"isAdmin,omitempty" gorm:"column:isAdmin" validate:"omitempty"`
 
-	TotalPolicy int64 `json:"totalPolicy" gorm:"-" validate:"omitempty"`
-
 	LoginedAt time.Time `json:"loginedAt,omitempty" gorm:"column:loginedAt"`
+
+	//TotalPolicy int64 `json:"totalPolicy" gorm:"-" validate:"omitempty"`
 }
 
-// UserList is the whole list of all users which have been stored in stroage.
-type UserList struct {
+// AdminList is the whole list of all admins which have been stored in stroage.
+type AdminList struct {
 	// May add TypeMeta in the future.
 	// metav1.TypeMeta `json:",inline"`
 
@@ -47,16 +50,16 @@ type UserList struct {
 	// +optional
 	metav1.ListMeta `json:",inline"`
 
-	Items []*User `json:"items"`
+	Items []*Admin `json:"items"`
 }
 
 // TableName maps to mysql table name.
-func (u *User) TableName() string {
-	return "user"
+func (u *Admin) TableName() string {
+	return TableNameGalloAdmins
 }
 
 // Compare with the plain text password. Returns true if it's the same as the encrypted one (in the `User` struct).
-func (u *User) Compare(pwd string) error {
+func (u *Admin) Compare(pwd string) error {
 	if err := auth.Compare(u.Password, pwd); err != nil {
 		return fmt.Errorf("failed to compile password: %w", err)
 	}
@@ -65,7 +68,7 @@ func (u *User) Compare(pwd string) error {
 }
 
 // AfterCreate run after create database record.
-func (u *User) AfterCreate(tx *gorm.DB) error {
+func (u *Admin) AfterCreate(tx *gorm.DB) error {
 	u.InstanceID = idutil.GetInstanceID(u.ID, "user-")
 
 	return tx.Save(u).Error
