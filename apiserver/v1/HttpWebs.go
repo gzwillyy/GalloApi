@@ -1,6 +1,7 @@
 package v1
 
 import (
+	metav1 "github.com/gzwillyy/components/pkg/meta/v1"
 	"github.com/gzwillyy/components/pkg/util/idutil"
 	"gorm.io/gorm"
 )
@@ -9,13 +10,12 @@ const TableNameGalloHTTPWeb = "galloHTTPWebs"
 
 // HTTPWeb HTTP Web
 type HTTPWeb struct {
-	ID                 int32  `gorm:"column:id;primaryKey;autoIncrement:true;comment:ID" json:"id"`            // ID
+	metav1.ObjectMeta  `json:"metadata,omitempty"`
 	IsOn               bool   `gorm:"column:isOn;default:1;comment:是否启用" json:"isOn"`                          // 是否启用
 	TemplateID         int32  `gorm:"column:templateId;comment:模版ID" json:"templateId"`                        // 模版ID
 	AdminID            int32  `gorm:"column:adminId;comment:管理员ID" json:"adminId"`                             // 管理员ID
 	UserID             int32  `gorm:"column:userId;comment:用户ID" json:"userId"`                                // 用户ID
 	State              bool   `gorm:"column:state;default:1;comment:状态" json:"state"`                          // 状态
-	CreatedAt          int64  `gorm:"column:createdAt;comment:创建时间" json:"createdAt"`                          // 创建时间
 	Root               string `gorm:"column:root;comment:根目录" json:"root"`                                     // 根目录
 	Charset            string `gorm:"column:charset;comment:字符集" json:"charset"`                               // 字符集
 	Shutdown           string `gorm:"column:shutdown;comment:临时关闭页面配置" json:"shutdown"`                        // 临时关闭页面配置
@@ -56,6 +56,6 @@ func (*HTTPWeb) TableName() string {
 }
 
 // AfterCreate run after create database record.
-func (u *NodeGroup) AfterCreate(tx *gorm.DB) error {
-	return tx.Model(u).UpdateColumn("instanceID", idutil.GetInstanceID(u.ID, "group-")).Error
+func (u *HTTPWeb) AfterCreate(tx *gorm.DB) error {
+	return tx.Model(u).UpdateColumn("instanceID", idutil.GetInstanceID(u.ID, "web-")).Error
 }
