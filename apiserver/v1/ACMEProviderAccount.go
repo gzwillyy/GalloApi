@@ -7,10 +7,10 @@ import (
 	"github.com/gzwillyy/components/pkg/util/idutil"
 )
 
-const TableNameGalloACMEProviderAccount = "galloACMEProviderAccounts"
+const TableNameACMEProviderAccount = "galloACMEProviderAccounts"
 
-// GalloACMEProviderAccount ACME提供商
-type GalloACMEProviderAccount struct {
+// ACMEProviderAccount ACME提供商
+type ACMEProviderAccount struct {
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	UserID            int64  `gorm:"column:userId;comment:用户ID" json:"userId"`           // 用户ID
 	IsOn              bool   `gorm:"column:isOn;default:1;comment:是否启用" json:"isOn"`     // 是否启用
@@ -21,19 +21,17 @@ type GalloACMEProviderAccount struct {
 	State             bool   `gorm:"column:state;default:1;comment:状态" json:"state"`     // 状态
 }
 
-// TableName GalloACMEProviderAccount's table name
-func (*GalloACMEProviderAccount) TableName() string {
-	return TableNameGalloACMEProviderAccount
+// TableName ACMEProviderAccount's table name
+func (*ACMEProviderAccount) TableName() string {
+	return TableNameACMEProviderAccount
 }
 
 // AfterCreate run after create database record.
-func (u *GalloACMEProviderAccount) AfterCreate(tx *gorm.DB) error {
-	u.InstanceID = idutil.GetInstanceID(u.ID, "account-")
-
-	return tx.Save(u).Error
+func (u *ACMEProviderAccount) AfterCreate(tx *gorm.DB) error {
+	return tx.Model(u).UpdateColumn("instanceID", idutil.GetInstanceID(u.ID, "account-")).Error
 }
 
-// ACME提供商
+// ACMEProvider ACME提供商
 type ACMEProvider struct {
 	Name           string `json:"name"  validate:"omitempty"`
 	Code           string `json:"code"  validate:"required,min=1,max=100"`
@@ -44,7 +42,7 @@ type ACMEProvider struct {
 	EABDescription string `json:"eabDescription"  validate:"omitempty"`
 }
 
-// 返回列表
+// ACMEProviderAccountList 返回列表
 type ACMEProviderAccountList struct {
 	// May add TypeMeta in the future.
 	// metav1.TypeMeta `json:",inline"`
@@ -53,15 +51,15 @@ type ACMEProviderAccountList struct {
 	metav1.ListMeta `json:",inline"`
 
 	// List of secrets
-	Items []*GalloACMEProviderAccount `json:"items"`
+	Items []*ACMEProviderAccount `json:"items"`
 }
 
-// 删除服务商账号请求
+// DeleteACMEProviderAccountRequest 删除服务商账号请求
 type DeleteACMEProviderAccountRequest struct {
 	InstanceID string `json:"instanceID"`
 }
 
-// 修改服务商账号请求
+// UpdateACMEProviderAccountRequest 修改服务商账号请求
 type UpdateACMEProviderAccountRequest struct {
 	InstanceID string `json:"instanceID"`
 	Name       string `json:"name"`

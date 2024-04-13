@@ -13,7 +13,7 @@ import (
 
 const TableNameGalloAdmins = "galloAdmins"
 
-// User represents a user restful resource. It is also used as gorm model.
+// Admin represents a user restful resource. It is also used as gorm model.
 type Admin struct {
 	// May add TypeMeta in the future.
 	// metav1.TypeMeta `json:",inline"`
@@ -69,7 +69,5 @@ func (u *Admin) Compare(pwd string) error {
 
 // AfterCreate run after create database record.
 func (u *Admin) AfterCreate(tx *gorm.DB) error {
-	u.InstanceID = idutil.GetInstanceID(u.ID, "user-")
-
-	return tx.Save(u).Error
+	return tx.Model(u).UpdateColumn("instanceID", idutil.GetInstanceID(u.ID, "admin-")).Error
 }

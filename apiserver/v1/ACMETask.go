@@ -7,10 +7,10 @@ import (
 	"github.com/gzwillyy/components/pkg/util/idutil"
 )
 
-const TableNameGalloACMETask = "galloACMETasks"
+const TableNameACMETask = "galloACMETasks"
 
-// GalloACMETask ACME任务
-type GalloACMETask struct {
+// ACMETask ACME任务
+type ACMETask struct {
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	AdminID           int64  `gorm:"column:adminId;comment:管理员ID" json:"adminId"`              // 管理员ID
 	UserID            int64  `gorm:"column:userId;comment:用户ID" json:"userId"`                 // 用户ID
@@ -26,16 +26,14 @@ type GalloACMETask struct {
 	AuthURL           string `gorm:"column:authURL;comment:认证URL" json:"authURL"`              // 认证URL
 }
 
-// TableName GalloACMETask's table name
-func (*GalloACMETask) TableName() string {
-	return TableNameGalloACMETask
+// TableName ACMETask's table name
+func (*ACMETask) TableName() string {
+	return TableNameACMETask
 }
 
 // AfterCreate run after create database record.
-func (u *GalloACMETask) AfterCreate(tx *gorm.DB) error {
-	u.InstanceID = idutil.GetInstanceID(u.ID, "task-")
-
-	return tx.Save(u).Error
+func (u *ACMETask) AfterCreate(tx *gorm.DB) error {
+	return tx.Model(u).UpdateColumn("instanceID", idutil.GetInstanceID(u.ID, "task-")).Error
 }
 
 // ACMETaskList 返回列表
@@ -47,9 +45,10 @@ type ACMETaskList struct {
 	metav1.ListMeta `json:",inline"`
 
 	// List of secrets
-	Items []*GalloACMETask `json:"items"`
+	Items []*ACMETask `json:"items"`
 }
 
+// CreateACMETaskRequest 创建请求
 type CreateACMETaskRequest struct {
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	UserId            int64    `json:"userId"`

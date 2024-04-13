@@ -1,9 +1,9 @@
 package v1
 
-const TableNameGalloACMEAuthentication = "galloACMEAuthentications"
+const TableNameACMEAuthentication = "galloACMEAuthentications"
 
-// GalloACMEAuthentication ACME认证
-type GalloACMEAuthentication struct {
+// ACMEAuthentication ACME认证
+type ACMEAuthentication struct {
 	ID        int64  `gorm:"column:id;primaryKey;autoIncrement:true;comment:ID" json:"id"` // ID
 	TaskID    int64  `gorm:"column:taskId;comment:任务ID" json:"taskId"`                     // 任务ID
 	Domain    string `gorm:"column:domain;comment:域名" json:"domain"`                       // 域名
@@ -12,7 +12,7 @@ type GalloACMEAuthentication struct {
 	CreatedAt int64  `gorm:"column:createdAt;comment:创建时间" json:"createdAt"`               // 创建时间
 }
 
-// TableName GalloACMEAuthentication's table name
-func (*GalloACMEAuthentication) TableName() string {
-	return TableNameGalloACMEAuthentication
+// TableName ACMEAuthentication's table name
+func (*ACMEAuthentication) TableName() string {
+	return TableNameACMEAuthentication
 }

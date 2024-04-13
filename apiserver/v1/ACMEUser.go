@@ -7,10 +7,10 @@ import (
 	"github.com/gzwillyy/components/pkg/util/idutil"
 )
 
-const TableNameGalloACMEUser = "galloACMEUsers"
+const TableNameACMEUser = "galloACMEUsers"
 
-// GalloACMEUser ACME用户
-type GalloACMEUser struct {
+// ACMEUser ACME用户
+type ACMEUser struct {
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	AdminID           int32  `gorm:"column:adminId;comment:管理员ID" json:"adminId"`                               // 管理员ID
 	UserID            int32  `gorm:"column:userId;comment:用户ID" json:"userId"`                                  // 用户ID
@@ -23,16 +23,14 @@ type GalloACMEUser struct {
 	AccountID         int64  `gorm:"column:accountId;comment:提供商ID" json:"accountId"`                           // 提供商ID
 }
 
-// TableName GalloACMEUser's table name
-func (*GalloACMEUser) TableName() string {
-	return TableNameGalloACMEUser
+// TableName ACMEUser's table name
+func (*ACMEUser) TableName() string {
+	return TableNameACMEUser
 }
 
 // AfterCreate run after create database record.
-func (u *GalloACMEUser) AfterCreate(tx *gorm.DB) error {
-	u.InstanceID = idutil.GetInstanceID(u.ID, "task-")
-
-	return tx.Save(u).Error
+func (u *ACMEUser) AfterCreate(tx *gorm.DB) error {
+	return tx.Model(u).UpdateColumn("instanceID", idutil.GetInstanceID(u.ID, "task-")).Error
 }
 
 // ACMEUserList 返回列表
@@ -44,7 +42,7 @@ type ACMEUserList struct {
 	metav1.ListMeta `json:",inline"`
 
 	// List of secrets
-	Items []*GalloACMEUser `json:"items"`
+	Items []*ACMEUser `json:"items"`
 }
 
 // DeleteACMEUserRequest 删除请求
