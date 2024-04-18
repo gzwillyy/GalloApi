@@ -4,8 +4,8 @@ const TableNameGalloRegionCountry = "galloRegionCountries"
 
 // RegionCountry 区域-国家/地区
 type RegionCountry struct {
-	ID          int32  `gorm:"column:id;primaryKey;autoIncrement:true;comment:ID" json:"id"` // ID
-	ValueID     int32  `gorm:"column:valueId;comment:实际ID" json:"valueId"`                   // 实际ID
+	ID          uint64 `gorm:"column:id;primaryKey;autoIncrement:true;comment:ID" json:"id"` // ID
+	ValueID     uint64 `gorm:"column:valueId;comment:实际ID" json:"valueId"`                   // 实际ID
 	ValueCode   string `gorm:"column:valueCode;comment:值代号" json:"valueCode"`                // 值代号
 	Name        string `gorm:"column:name;comment:名称" json:"name"`                           // 名称
 	Codes       string `gorm:"column:codes;comment:代号" json:"codes"`                         // 代号

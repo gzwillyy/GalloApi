@@ -1,9 +1,10 @@
 package v1
 
 import (
+	"gorm.io/gorm"
+
 	metav1 "github.com/gzwillyy/components/pkg/meta/v1"
 	"github.com/gzwillyy/components/pkg/util/idutil"
-	"gorm.io/gorm"
 )
 
 const TableNameGalloHTTPWeb = "galloHTTPWebs"
@@ -12,9 +13,9 @@ const TableNameGalloHTTPWeb = "galloHTTPWebs"
 type HTTPWeb struct {
 	metav1.ObjectMeta  `json:"metadata,omitempty"`
 	IsOn               bool   `gorm:"column:isOn;default:1;comment:是否启用" json:"isOn"`                          // 是否启用
-	TemplateID         int32  `gorm:"column:templateId;comment:模版ID" json:"templateId"`                        // 模版ID
-	AdminID            int32  `gorm:"column:adminId;comment:管理员ID" json:"adminId"`                             // 管理员ID
-	UserID             int32  `gorm:"column:userId;comment:用户ID" json:"userId"`                                // 用户ID
+	TemplateID         uint64 `gorm:"column:templateId;comment:模版ID" json:"templateId"`                        // 模版ID
+	AdminID            uint64 `gorm:"column:adminId;comment:管理员ID" json:"adminId"`                             // 管理员ID
+	UserID             uint64 `gorm:"column:userId;comment:用户ID" json:"userId"`                                // 用户ID
 	State              bool   `gorm:"column:state;default:1;comment:状态" json:"state"`                          // 状态
 	Root               string `gorm:"column:root;comment:根目录" json:"root"`                                     // 根目录
 	Charset            string `gorm:"column:charset;comment:字符集" json:"charset"`                               // 字符集
@@ -58,4 +59,28 @@ func (*HTTPWeb) TableName() string {
 // AfterCreate run after create database record.
 func (u *HTTPWeb) AfterCreate(tx *gorm.DB) error {
 	return tx.Model(u).UpdateColumn("instanceID", idutil.GetInstanceID(u.ID, "web-")).Error
+}
+
+// HTTPWebList 返回列表
+type HTTPWebList struct {
+	metav1.ListMeta `json:",inline"`
+	Items           []*HTTPWeb `json:"items"`
+}
+
+// CreateHTTPWebRequest 创建分组
+type CreateHTTPWebRequest struct {
+	AdminID uint64 `json:"adminId"` // 管理员ID
+	UserID  uint64 `json:"userId"`  // 用户ID
+	Root    string `json:"root"`    // 根目录
+}
+
+// UpdateHTTPWebRequest 修改分组
+type UpdateHTTPWebRequest struct {
+	InstanceID string `json:"instanceID"`
+	Name       string `json:"name"`
+}
+
+// DeleteHTTPWebRequest 删除分组
+type DeleteHTTPWebRequest struct {
+	InstanceID string `json:"instanceID"`
 }

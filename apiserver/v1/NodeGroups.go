@@ -12,9 +12,9 @@ const TableNameNodeGroup = "galloNodeGroups"
 // NodeGroup 节点分组
 type NodeGroup struct {
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	ClusterID         int32 `gorm:"column:clusterId;comment:集群ID" json:"clusterId"` // 集群ID
-	Order             int32 `gorm:"column:order;comment:排序" json:"order"`           // 排序
-	State             bool  `gorm:"column:state;default:1;comment:状态" json:"state"` // 状态
+	ClusterID         uint64 `gorm:"column:clusterId;comment:集群ID" json:"clusterId"` // 集群ID
+	Order             uint64 `gorm:"column:order;comment:排序" json:"order"`           // 排序
+	State             bool   `gorm:"column:state;default:1;comment:状态" json:"state"` // 状态
 }
 
 // TableName NodeGroup's table name

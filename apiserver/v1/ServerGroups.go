@@ -12,15 +12,15 @@ const TableNameGalloServerGroup = "galloServerGroups"
 // ServerGroup 服务分组
 type ServerGroup struct {
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	AdminID           int32  `gorm:"column:adminId;comment:管理员ID" json:"adminId"`                    // 管理员ID
-	UserID            int32  `gorm:"column:userId;comment:用户ID" json:"userId"`                       // 用户ID
+	AdminID           uint64 `gorm:"column:adminId;comment:管理员ID" json:"adminId"`                    // 管理员ID
+	UserID            uint64 `gorm:"column:userId;comment:用户ID" json:"userId"`                       // 用户ID
 	IsOn              bool   `gorm:"column:isOn;default:1;comment:是否启用" json:"isOn"`                 // 是否启用
-	Order             int32  `gorm:"column:order;comment:排序" json:"order"`                           // 排序
+	Order             uint64 `gorm:"column:order;comment:排序" json:"order"`                           // 排序
 	State             bool   `gorm:"column:state;default:1;comment:状态" json:"state"`                 // 状态
 	HTTPReverseProxy  string `gorm:"column:httpReverseProxy;comment:反向代理设置" json:"httpReverseProxy"` // 反向代理设置
 	TcpReverseProxy   string `gorm:"column:tcpReverseProxy;comment:TCP反向代理" json:"tcpReverseProxy"`  // TCP反向代理
 	UdpReverseProxy   string `gorm:"column:udpReverseProxy;comment:UDP反向代理" json:"udpReverseProxy"`  // UDP反向代理
-	WebID             int32  `gorm:"column:webId;comment:Web配置ID" json:"webId"`                      // Web配置ID
+	WebID             uint64 `gorm:"column:webId;comment:Web配置ID" json:"webId"`                      // Web配置ID
 }
 
 // TableName ServerGroup's table name
@@ -48,6 +48,7 @@ type CreateServerGroupRequest struct {
 type UpdateServerGroupRequest struct {
 	InstanceID string `json:"instanceID"`
 	Name       string `json:"name"`
+	RootJSON   string `json:"root"`
 }
 
 // DeleteServerGroupRequest 删除分组
