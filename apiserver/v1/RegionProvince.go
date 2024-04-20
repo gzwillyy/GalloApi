@@ -1,12 +1,14 @@
 package v1
 
+import metav1 "github.com/gzwillyy/components/pkg/meta/v1"
+
 const TableNameGalloRegionProvince = "galloRegionProvinces"
 
 // RegionProvince 区域-省份
 type RegionProvince struct {
-	ID          uint64 `gorm:"column:id;primaryKey;autoIncrement:true;comment:ID" json:"id"` // ID
-	ValueID     uint64 `gorm:"column:valueId;comment:实际ID" json:"valueId"`                   // 实际ID
-	CountryID   uint64 `gorm:"column:countryId;comment:国家ID" json:"countryId"`               // 国家ID
+	ID          uint32 `gorm:"column:id;primaryKey;autoIncrement:true;comment:ID" json:"id"` // ID
+	ValueID     uint32 `gorm:"column:valueId;comment:实际ID" json:"valueId"`                   // 实际ID
+	CountryID   uint32 `gorm:"column:countryId;comment:国家ID" json:"countryId"`               // 国家ID
 	Name        string `gorm:"column:name;comment:名称" json:"name"`                           // 名称
 	Codes       string `gorm:"column:codes;comment:代号" json:"codes"`                         // 代号
 	CustomName  string `gorm:"column:customName;comment:自定义名称" json:"customName"`            // 自定义名称
@@ -19,4 +21,9 @@ type RegionProvince struct {
 // TableName RegionProvince's table name
 func (*RegionProvince) TableName() string {
 	return TableNameGalloRegionProvince
+}
+
+type RegionProvinceList struct {
+	metav1.ListMeta `json:",inline"`
+	Items           []*RegionProvince `json:"items"`
 }

@@ -11,7 +11,7 @@ import (
 	"github.com/gzwillyy/components/pkg/util/idutil"
 )
 
-const TableNameGalloAdmins = "galloAdmins"
+const TableNameAdmins = "galloAdmins"
 
 // Admin represents a user restful resource. It is also used as gorm model.
 type Admin struct {
@@ -38,7 +38,7 @@ type Admin struct {
 
 	LoginedAt time.Time `json:"loginedAt,omitempty" gorm:"column:loginedAt"`
 
-	//TotalPolicy int64 `json:"totalPolicy" gorm:"-" validate:"omitempty"`
+	//TotalPolicy uint32 `json:"totalPolicy" gorm:"-" validate:"omitempty"`
 }
 
 // AdminList is the whole list of all admins which have been stored in stroage.
@@ -55,7 +55,7 @@ type AdminList struct {
 
 // TableName maps to mysql table name.
 func (u *Admin) TableName() string {
-	return TableNameGalloAdmins
+	return TableNameAdmins
 }
 
 // Compare with the plain text password. Returns true if it's the same as the encrypted one (in the `User` struct).

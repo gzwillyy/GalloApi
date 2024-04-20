@@ -12,15 +12,15 @@ const TableNameACMETask = "galloACMETasks"
 // ACMETask ACME任务
 type ACMETask struct {
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	AdminID           int64  `gorm:"column:adminId;comment:管理员ID" json:"adminId"`              // 管理员ID
-	UserID            int64  `gorm:"column:userId;comment:用户ID" json:"userId"`                 // 用户ID
+	AdminID           uint32  `gorm:"column:adminId;comment:管理员ID" json:"adminId"`              // 管理员ID
+	UserID            uint32  `gorm:"column:userId;comment:用户ID" json:"userId"`                 // 用户ID
 	IsOn              bool   `gorm:"column:isOn;default:1;comment:是否启用" json:"isOn"`           // 是否启用
-	AcmeUserID        int64  `gorm:"column:acmeUserId;comment:ACME用户ID" json:"acmeUserId"`     // ACME用户ID
+	AcmeUserID        uint32  `gorm:"column:acmeUserId;comment:ACME用户ID" json:"acmeUserId"`     // ACME用户ID
 	DNSDomain         string `gorm:"column:dnsDomain;comment:DNS主域名" json:"dnsDomain"`         // DNS主域名
-	DNSProviderID     int64  `gorm:"column:dnsProviderId;comment:DNS服务商" json:"dnsProviderId"` // DNS服务商
+	DNSProviderID     uint32  `gorm:"column:dnsProviderId;comment:DNS服务商" json:"dnsProviderId"` // DNS服务商
 	Domains           string `gorm:"column:domains;comment:证书域名" json:"domains"`               // 证书域名
 	State             bool   `gorm:"column:state;default:1;comment:状态" json:"state"`           // 状态
-	CertID            int64  `gorm:"column:certId;comment:生成的证书ID" json:"certId"`              // 生成的证书ID
+	CertID            uint32  `gorm:"column:certId;comment:生成的证书ID" json:"certId"`              // 生成的证书ID
 	AutoRenew         bool   `gorm:"column:autoRenew;comment:是否自动更新" json:"autoRenew"`         // 是否自动更新
 	AuthType          string `gorm:"column:authType;comment:认证类型" json:"authType"`             // 认证类型
 	AuthURL           string `gorm:"column:authURL;comment:认证URL" json:"authURL"`              // 认证URL
@@ -51,9 +51,9 @@ type ACMETaskList struct {
 // CreateACMETaskRequest 创建请求
 type CreateACMETaskRequest struct {
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	UserId            int64    `json:"userId"`
-	AcmeUserID        int64    `json:"acmeUserId"`
-	DNSProviderID     int64    `json:"dnsProviderId"`
+	UserId            uint32    `json:"userId"`
+	AcmeUserID        uint32    `json:"acmeUserId"`
+	DNSProviderID     uint32    `json:"dnsProviderId"`
 	DNSDomain         string   `json:"dnsDomain"`
 	Domains           []string `json:"domains"`
 	AutoRenew         bool     `json:"autoRenew"`
@@ -74,8 +74,8 @@ type RunACMETaskRequest struct {
 // UpdateACMETaskRequest 修改请求
 type UpdateACMETaskRequest struct {
 	InstanceID    string   `json:"instanceID"`
-	AcmeUserID    int64    `json:"acmeUserId"`
-	DNSProviderID int64    `json:"dnsProviderId"`
+	AcmeUserID    uint32    `json:"acmeUserId"`
+	DNSProviderID uint32    `json:"dnsProviderId"`
 	DNSDomain     string   `json:"dnsDomain"`
 	Domains       []string `json:"domains"`
 	AutoRenew     bool     `json:"autoRenew"`

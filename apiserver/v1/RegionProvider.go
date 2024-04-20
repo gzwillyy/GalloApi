@@ -1,11 +1,13 @@
 package v1
 
+import metav1 "github.com/gzwillyy/components/pkg/meta/v1"
+
 const TableNameGalloRegionProvider = "galloRegionProviders"
 
 // RegionProvider 区域-运营商
 type RegionProvider struct {
-	ID          uint64 `gorm:"column:id;primaryKey;autoIncrement:true;comment:ID" json:"id"` // ID
-	ValueID     uint64 `gorm:"column:valueId;comment:实际ID" json:"valueId"`                   // 实际ID
+	ID          uint32 `gorm:"column:id;primaryKey;autoIncrement:true;comment:ID" json:"id"` // ID
+	ValueID     uint32 `gorm:"column:valueId;comment:实际ID" json:"valueId"`                   // 实际ID
 	Name        string `gorm:"column:name;comment:名称" json:"name"`                           // 名称
 	Codes       string `gorm:"column:codes;comment:代号" json:"codes"`                         // 代号
 	CustomName  string `gorm:"column:customName;comment:自定义名称" json:"customName"`            // 自定义名称
@@ -16,4 +18,9 @@ type RegionProvider struct {
 // TableName RegionProvider's table name
 func (*RegionProvider) TableName() string {
 	return TableNameGalloRegionProvider
+}
+
+type RegionProviderList struct {
+	metav1.ListMeta `json:",inline"`
+	Items           []*RegionProvider `json:"items"`
 }

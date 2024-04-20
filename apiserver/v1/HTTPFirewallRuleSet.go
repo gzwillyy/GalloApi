@@ -7,7 +7,7 @@ import (
 	"github.com/gzwillyy/components/pkg/util/idutil"
 )
 
-const TableNameGalloHTTPFirewallRuleSet = "galloHTTPFirewallRuleSets"
+const TableNameHTTPFirewallRuleSet = "galloHTTPFirewallRuleSets"
 
 // HTTPFirewallRuleSet 防火墙规则集
 type HTTPFirewallRuleSet struct {
@@ -18,20 +18,25 @@ type HTTPFirewallRuleSet struct {
 	Rules             string `gorm:"column:rules;comment:规则列表" json:"rules"`                      // 规则列表
 	Connector         string `gorm:"column:connector;comment:规则之间的关系" json:"connector"`           // 规则之间的关系
 	State             bool   `gorm:"column:state;default:1;comment:状态" json:"state"`              // 状态
-	AdminID           uint64 `gorm:"column:adminId;comment:管理员ID" json:"adminId"`                 // 管理员ID
-	UserID            uint64 `gorm:"column:userId;comment:用户ID" json:"userId"`                    // 用户ID
+	AdminID           uint32 `gorm:"column:adminId;comment:管理员ID" json:"adminId"`                 // 管理员ID
+	UserID            uint32 `gorm:"column:userId;comment:用户ID" json:"userId"`                    // 用户ID
 	Action            string `gorm:"column:action;comment:执行的动作（过期）" json:"action"`               // 执行的动作（过期）
 	ActionOptions     string `gorm:"column:actionOptions;comment:动作的选项（过期）" json:"actionOptions"` // 动作的选项（过期）
 	Actions           string `gorm:"column:actions;comment:一组动作" json:"actions"`                  // 一组动作
-	IgnoreLocal       bool   `gorm:"column:ignoreLocal;comment:忽略局域网请求" json:"ignoreLocal"`       // 忽略局域网请求
+	IgnoreLocal       uint32 `gorm:"column:ignoreLocal;comment:忽略局域网请求" json:"ignoreLocal"`       // 忽略局域网请求
 }
 
 // TableName HTTPFirewallRuleSet's table name
 func (*HTTPFirewallRuleSet) TableName() string {
-	return TableNameGalloHTTPFirewallRuleSet
+	return TableNameHTTPFirewallRuleSet
 }
 
 // AfterCreate run after create database record.
 func (u *HTTPFirewallRuleSet) AfterCreate(tx *gorm.DB) error {
 	return tx.Model(u).UpdateColumn("instanceID", idutil.GetInstanceID(u.ID, "set-")).Error
+}
+
+type HTTPFirewallRuleSetList struct {
+	metav1.ListMeta `json:",inline"`
+	Items           []*HTTPFirewallRuleSet `json:"items"`
 }
