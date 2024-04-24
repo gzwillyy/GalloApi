@@ -14,7 +14,7 @@ const TableNameHTTPCacheTask = "galloHTTPCacheTasks"
 // HTTPCacheTask 缓存相关任务
 type HTTPCacheTask struct {
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	UserID            uint32    `gorm:"column:userId;comment:用户ID" json:"userId"`         // 用户ID
+	UserID            uint64    `gorm:"column:userId;comment:用户ID" json:"userId"`         // 用户ID
 	Type              string    `gorm:"column:type;comment:任务类型：purge|fetch" json:"type"` // 任务类型：purge|fetch
 	KeyType           string    `gorm:"column:keyType;comment:Key类型" json:"keyType"`      // Key类型
 	State             bool      `gorm:"column:state;default:1;comment:状态" json:"state"`   // 状态
@@ -40,3 +40,5 @@ type HTTPCacheTaskList struct {
 	metav1.ListMeta `json:",inline"`
 	Items           []*HTTPCacheTask `json:"items"`
 }
+
+var HTTPCacheTaskTableZeroFields = []string{"name", "state", "day", "description"}

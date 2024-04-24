@@ -84,3 +84,6 @@ type UpdateHTTPWebRequest struct {
 type DeleteHTTPWebRequest struct {
 	InstanceID string `json:"instanceID"`
 }
+
+var HTTPWebTableZeroFields = []string{"name", "isOn", "root", "requestLimit"}
+

@@ -21,8 +21,8 @@ type HTTPFirewallRule struct {
 	IsCaseInsensitive uint32 `gorm:"column:isCaseInsensitive;default:1;comment:是否大小写不敏感" json:"isCaseInsensitive"` // 是否大小写不敏感
 	CheckpointOptions string `gorm:"column:checkpointOptions;comment:检查点参数" json:"checkpointOptions"`              // 检查点参数
 	State             bool   `gorm:"column:state;default:1;comment:状态" json:"state"`                               // 状态
-	AdminID           uint32 `gorm:"column:adminId;comment:管理员ID" json:"adminId"`                                  // 管理员ID
-	UserID            uint32 `gorm:"column:userId;comment:用户ID" json:"userId"`                                     // 用户ID
+	AdminID           uint64 `gorm:"column:adminId;comment:管理员ID" json:"adminId"`                                  // 管理员ID
+	UserID            uint64 `gorm:"column:userId;comment:用户ID" json:"userId"`                                     // 用户ID
 }
 
 // TableName HTTPFirewallRule's table name
@@ -39,3 +39,5 @@ type HTTPFirewallRuleList struct {
 	metav1.ListMeta `json:",inline"`
 	Items           []*HTTPFirewallRule `json:"items"`
 }
+
+var HTTPFirewallRuleTableZeroFields = []string{"name", "isOn", "description", "param", "paramFilters", "operator", "value", "checkpointOptions", "state"}

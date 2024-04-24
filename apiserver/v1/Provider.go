@@ -32,3 +32,6 @@ type ProviderList struct {
 	metav1.ListMeta `json:",inline"`
 	Items           []*Provider `json:"items"`
 }
+
+var ProviderTableZeroFields = []string{"name", "username", "password", "fullname", "state"}
+

@@ -12,8 +12,8 @@ const TableNameTCPFirewallPolicy = "galloTCPFirewallPolicies"
 // TCPFirewallPolicy TCP防火墙
 type TCPFirewallPolicy struct {
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	AdminID           uint32 `gorm:"column:adminId;comment:管理员ID" json:"adminId"`      // 管理员ID
-	UserID            uint32 `gorm:"column:userId;comment:用户ID" json:"userId"`         // 用户ID
+	AdminID           uint64 `gorm:"column:adminId;comment:管理员ID" json:"adminId"`      // 管理员ID
+	UserID            uint64 `gorm:"column:userId;comment:用户ID" json:"userId"`         // 用户ID
 	TemplateID        uint32 `gorm:"column:templateId;comment:模版ID" json:"templateId"` // 模版ID
 }
 
@@ -29,5 +29,5 @@ func (u *TCPFirewallPolicy) AfterCreate(tx *gorm.DB) error {
 
 type TCPFirewallPolicyList struct {
 	metav1.ListMeta `json:",inline"`
-	Items []*TCPFirewallPolicy `json:"items"`
+	Items           []*TCPFirewallPolicy `json:"items"`
 }

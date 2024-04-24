@@ -24,7 +24,7 @@ type HTTPCachePolicy struct {
 	State                bool   `gorm:"column:state;default:1;comment:状态" json:"state"`                             // 状态
 	Description          string `gorm:"column:description;comment:描述" json:"description"`                           // 描述
 	Refs                 string `gorm:"column:refs;comment:默认的缓存设置" json:"refs"`                                    // 默认的缓存设置
-	SyncCompressionCache uint32 `gorm:"column:syncCompressionCache;comment:是否同步写入压缩缓存" json:"syncCompressionCache"` // 是否同步写入压缩缓存
+	SyncCompressionCache bool   `gorm:"column:syncCompressionCache;comment:是否同步写入压缩缓存" json:"syncCompressionCache"` // 是否同步写入压缩缓存
 	FetchTimeout         string `gorm:"column:fetchTimeout;comment:预热超时时间" json:"fetchTimeout"`                     // 预热超时时间
 }
 
@@ -42,3 +42,5 @@ type HTTPCachePolicyList struct {
 	metav1.ListMeta `json:",inline"`
 	Items           []*HTTPCachePolicy `json:"items"`
 }
+
+var HTTPCachePolicyTableZeroFields = []string{"name", "capacity", "maxSize", "type", "options", "state", "description", "refs", "fetchTimeout"}

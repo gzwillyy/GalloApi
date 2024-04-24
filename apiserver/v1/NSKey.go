@@ -36,3 +36,6 @@ type NSKeyList struct {
 	metav1.ListMeta `json:",inline"`
 	Items           []*NSKey `json:"items"`
 }
+
+var NSKeyTableZeroFields = []string{"name", "isOn", "secret", "secretType", "state"}
+

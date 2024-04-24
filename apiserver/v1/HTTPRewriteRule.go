@@ -12,8 +12,8 @@ const TableNameHTTPRewriteRule = "galloHTTPRewriteRules"
 // HTTPRewriteRule 重写规则
 type HTTPRewriteRule struct {
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	AdminID           uint32 `gorm:"column:adminId;comment:管理员ID" json:"adminId"`                   // 管理员ID
-	UserID            uint32 `gorm:"column:userId;comment:用户ID" json:"userId"`                      // 用户ID
+	AdminID           uint64 `gorm:"column:adminId;comment:管理员ID" json:"adminId"`                   // 管理员ID
+	UserID            uint64 `gorm:"column:userId;comment:用户ID" json:"userId"`                      // 用户ID
 	TemplateID        uint32 `gorm:"column:templateId;comment:模版ID" json:"templateId"`              // 模版ID
 	IsOn              bool   `gorm:"column:isOn;default:1;comment:是否启用" json:"isOn"`                // 是否启用
 	State             bool   `gorm:"column:state;default:1;comment:状态" json:"state"`                // 状态
@@ -40,3 +40,5 @@ type HTTPRewriteRuleList struct {
 	metav1.ListMeta `json:",inline"`
 	Items           []*HTTPRewriteRule `json:"items"`
 }
+
+var HTTPRewriteRuleTableZeroFields = []string{"name", "state", "pattern", "replace", "mode", "proxyHost", "conds"}

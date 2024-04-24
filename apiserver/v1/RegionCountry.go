@@ -38,3 +38,6 @@ type RegionCountryList struct {
 	metav1.ListMeta `json:",inline"`
 	Items           []*RegionCountry `json:"items"`
 }
+
+var RegionCountryTableZeroFields = []string{"name", "codes", "customName", "customCodes", "state", "dataId", "isCommon", "routeCode"}
+

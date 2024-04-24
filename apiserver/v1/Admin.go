@@ -71,3 +71,6 @@ func (u *Admin) Compare(pwd string) error {
 func (u *Admin) AfterCreate(tx *gorm.DB) error {
 	return tx.Model(u).UpdateColumn("instanceID", idutil.GetInstanceID(u.ID, "admin-")).Error
 }
+
+var AdminTableZeroFields = []string{"name", "phone"}
+

@@ -30,3 +30,6 @@ type ReportNodeGroupList struct {
 	metav1.ListMeta `json:",inline"`
 	Items           []*ReportNodeGroup `json:"items"`
 }
+
+var ReportNodeGroupTableZeroFields = []string{"name", "state", "isOn"}
+

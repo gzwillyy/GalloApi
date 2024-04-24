@@ -12,8 +12,8 @@ const TableNameSSLPolicy = "galloSSLPolicies"
 // SSLPolicy SSL配置策略
 type SSLPolicy struct {
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	AdminID           uint32 `gorm:"column:adminId;comment:管理员ID" json:"adminId"`                          // 管理员ID
-	UserID            uint32 `gorm:"column:userId;comment:用户ID" json:"userId"`                             // 用户ID
+	AdminID           uint64 `gorm:"column:adminId;comment:管理员ID" json:"adminId"`                          // 管理员ID
+	UserID            uint64 `gorm:"column:userId;comment:用户ID" json:"userId"`                             // 用户ID
 	IsOn              bool   `gorm:"column:isOn;default:1;comment:是否启用" json:"isOn"`                       // 是否启用
 	Certs             string `gorm:"column:certs;comment:证书列表" json:"certs"`                               // 证书列表
 	ClientCACerts     string `gorm:"column:clientCACerts;comment:客户端证书" json:"clientCACerts"`              // 客户端证书
@@ -42,3 +42,5 @@ type SSLPolicyList struct {
 	metav1.ListMeta `json:",inline"`
 	Items           []*SSLPolicy `json:"items"`
 }
+
+var SSLPolicyTableZeroFields = []string{"name", "certs", "clientCACerts", "minVersion", "cipherSuitesIsOn", "cipherSuites", "hsts"}

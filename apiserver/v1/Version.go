@@ -29,3 +29,5 @@ type VersionList struct {
 	metav1.ListMeta `json:",inline"`
 	Items []*Version `json:"items"`
 }
+var VersionTableZeroFields = []string{"name", "version"}
+

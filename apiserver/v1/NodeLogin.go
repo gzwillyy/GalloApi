@@ -33,3 +33,6 @@ type NodeLoginList struct {
 	metav1.ListMeta `json:",inline"`
 	Items           []*NodeLogin `json:"items"`
 }
+
+var NodeLoginTableZeroFields = []string{"name", "type", "state"}
+

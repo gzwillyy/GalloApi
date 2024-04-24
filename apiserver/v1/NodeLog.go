@@ -42,3 +42,5 @@ type NodeLogList struct {
 	metav1.ListMeta `json:",inline"`
 	Items []*NodeLog `json:"items"`
 }
+var NodeLogTableZeroFields = []string{"name", "role", "type", "tag", "description", "level", "params"}
+

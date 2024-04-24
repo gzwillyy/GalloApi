@@ -49,3 +49,6 @@ type HTTPFirewallPolicyList struct {
 	metav1.ListMeta `json:",inline"`
 	Items           []*HTTPFirewallPolicy `json:"items"`
 }
+
+var HTTPFirewallPolicyTableZeroFields = []string{"name", "isOn", "description", "inbound", "synFlood", "denyCountryHTML", "denyProvinceHTML"}
+

@@ -54,3 +54,6 @@ type SSLCertList struct {
 	metav1.ListMeta `json:",inline"`
 	Items           []*SSLCert `json:"items"`
 }
+
+var SSLCertTableZeroFields = []string{"name", "isOn", "description", "serverName", "groupIds", "dnsNames", "commonNames", "ocspError"}
+

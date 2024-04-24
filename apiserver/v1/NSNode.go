@@ -45,3 +45,6 @@ type NSNodeList struct {
 	metav1.ListMeta `json:",inline"`
 	Items           []*NSNode `json:"items"`
 }
+
+var NSNodeTableZeroFields = []string{"name", "status", "uniqueId", "installStatus", "installDir", "state", "connectedAPINodes", "ddosProtection", "apiNodeAddrs"}
+

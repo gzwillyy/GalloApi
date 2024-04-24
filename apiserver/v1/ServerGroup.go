@@ -12,8 +12,8 @@ const TableNameServerGroup = "galloServerGroups"
 // ServerGroup 服务分组
 type ServerGroup struct {
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	AdminID           uint32 `gorm:"column:adminId;comment:管理员ID" json:"adminId"`                         // 管理员ID
-	UserID            uint32 `gorm:"column:userId;comment:用户ID" json:"userId"`                            // 用户ID
+	AdminID           uint64 `gorm:"column:adminId;comment:管理员ID" json:"adminId"`                         // 管理员ID
+	UserID            uint64 `gorm:"column:userId;comment:用户ID" json:"userId"`                            // 用户ID
 	IsOn              bool   `gorm:"column:isOn;default:1;comment:是否启用" json:"isOn"`                      // 是否启用
 	Order             uint32 `gorm:"column:order;comment:排序" json:"order"`                                // 排序
 	State             bool   `gorm:"column:state;default:1;comment:状态" json:"state"`                      // 状态
@@ -55,3 +55,5 @@ type UpdateServerGroupRequest struct {
 type DeleteServerGroupRequest struct {
 	InstanceID string `json:"instanceID"`
 }
+
+var ServerGroupTableZeroFields = []string{"name", "state", "httpReverseProxy"}

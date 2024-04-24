@@ -35,3 +35,6 @@ type NodeIPAddressThresholdList struct {
 	metav1.ListMeta `json:",inline"`
 	Items           []*NodeIPAddressThreshold `json:"items"`
 }
+
+var NodeIPAddressThresholdTableZeroFields = []string{"name", "actions", "state"}
+

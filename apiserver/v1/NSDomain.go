@@ -39,3 +39,6 @@ type NSDomainList struct {
 	metav1.ListMeta `json:",inline"`
 	Items           []*NSDomain `json:"items"`
 }
+
+var NSDomainTableZeroFields = []string{"name", "groupIds", "verifyTXT", "recordsHealthCheck", "status"}
+

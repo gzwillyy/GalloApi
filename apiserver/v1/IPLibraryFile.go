@@ -42,3 +42,6 @@ type IPLibraryFileList struct {
 	metav1.ListMeta `json:",inline"`
 	Items           []*IPLibraryFile `json:"items"`
 }
+
+var IPLibraryFileTableZeroFields = []string{"name", "emptyValues", "countries", "provinces", "cities", "towns", "providers", "code", "password", "state"}
+

@@ -12,8 +12,8 @@ const TableNameHTTPWebsocket = "galloHTTPWebsockets"
 // HTTPWebsocket Websocket设置
 type HTTPWebsocket struct {
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	AdminID           uint32 `gorm:"column:adminId;comment:管理员ID" json:"adminId"`                                       // 管理员ID
-	UserID            uint32 `gorm:"column:userId;comment:用户ID" json:"userId"`                                          // 用户ID
+	AdminID           uint64 `gorm:"column:adminId;comment:管理员ID" json:"adminId"`                                       // 管理员ID
+	UserID            uint64 `gorm:"column:userId;comment:用户ID" json:"userId"`                                          // 用户ID
 	State             bool   `gorm:"column:state;default:1;comment:状态" json:"state"`                                    // 状态
 	IsOn              bool   `gorm:"column:isOn;default:1;comment:是否启用" json:"isOn"`                                    // 是否启用
 	HandshakeTimeout  string `gorm:"column:handshakeTimeout;comment:握手超时时间" json:"handshakeTimeout"`                    // 握手超时时间
@@ -38,3 +38,5 @@ type HTTPWebsocketList struct {
 	metav1.ListMeta `json:",inline"`
 	Items           []*HTTPWebsocket `json:"items"`
 }
+
+var HTTPWebsocketTableZeroFields = []string{"name", "isOn", "handshakeTimeout", "allowedOrigins"}

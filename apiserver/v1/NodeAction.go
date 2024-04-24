@@ -36,3 +36,6 @@ type NodeActionList struct {
 	metav1.ListMeta `json:",inline"`
 	Items           []*NodeAction `json:"items"`
 }
+
+var NodeActionTableZeroFields = []string{"name", "isOn", "conds", "action", "duration", "state"}
+

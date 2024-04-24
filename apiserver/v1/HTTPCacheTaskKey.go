@@ -36,3 +36,5 @@ type HTTPCacheTaskKeyList struct {
 	metav1.ListMeta `json:",inline"`
 	Items []*HTTPCacheTaskKey `json:"items"`
 }
+var HTTPCacheTaskKeyTableZeroFields = []string{"name", "errors"}
+

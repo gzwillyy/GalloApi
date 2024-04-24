@@ -16,8 +16,8 @@ type NSRoute struct {
 	ClusterID         uint32 `gorm:"column:clusterId;comment:集群ID" json:"clusterId"`         // 集群ID
 	CategoryID        uint32 `gorm:"column:categoryId;comment:分类ID" json:"categoryId"`       // 分类ID
 	DomainID          uint32 `gorm:"column:domainId;comment:域名ID" json:"domainId"`           // 域名ID
-	AdminID           uint32 `gorm:"column:adminId;comment:管理员ID" json:"adminId"`            // 管理员ID
-	UserID            uint32 `gorm:"column:userId;comment:用户ID" json:"userId"`               // 用户ID
+	AdminID           uint64 `gorm:"column:adminId;comment:管理员ID" json:"adminId"`            // 管理员ID
+	UserID            uint64 `gorm:"column:userId;comment:用户ID" json:"userId"`               // 用户ID
 	IsPublic          uint32 `gorm:"column:isPublic;comment:是否公用（管理员创建的线路）" json:"isPublic"` // 是否公用（管理员创建的线路）
 	Ranges            string `gorm:"column:ranges;comment:范围" json:"ranges"`                 // 范围
 	Order             uint32 `gorm:"column:order;comment:排序" json:"order"`                   // 排序
@@ -41,3 +41,5 @@ type NSRouteList struct {
 	metav1.ListMeta `json:",inline"`
 	Items           []*NSRoute `json:"items"`
 }
+
+var NSRouteTableZeroFields = []string{"name", "isOn", "ranges", "code", "state"}

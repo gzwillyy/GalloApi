@@ -48,3 +48,6 @@ type NSClusterList struct {
 	metav1.ListMeta `json:",inline"`
 	Items           []*NSCluster `json:"items"`
 }
+
+var NSClusterTableZeroFields = []string{"name", "isOn", "installDir", "state", "accessLog", "tcp", "tls", "udp", "doh", "ddosProtection", "hosts", "soa", "timeZone", "answer", "email"}
+

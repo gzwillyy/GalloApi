@@ -34,3 +34,6 @@ type NSZoneList struct {
 	metav1.ListMeta `json:",inline"`
 	Items           []*NSZone `json:"items"`
 }
+
+var NSZoneTableZeroFields = []string{"name", "tsig", "state"}
+

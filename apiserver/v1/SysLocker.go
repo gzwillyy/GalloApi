@@ -31,3 +31,5 @@ type SysLockerList struct {
 	metav1.ListMeta `json:",inline"`
 	Items []*SysLocker `json:"items"`
 }
+var SysLockerTableZeroFields = []string{"name", "key"}
+

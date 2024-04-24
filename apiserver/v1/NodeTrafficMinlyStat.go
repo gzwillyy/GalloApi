@@ -38,3 +38,5 @@ type NodeTrafficMinlyStatList struct {
 	metav1.ListMeta `json:",inline"`
 	Items []*NodeTrafficMinlyStat `json:"items"`
 }
+var NodeTrafficMinlyStatTableZeroFields = []string{"name", "role"}
+

@@ -38,3 +38,6 @@ type ReportNodeList struct {
 	metav1.ListMeta `json:",inline"`
 	Items           []*ReportNode `json:"items"`
 }
+
+var ReportNodeTableZeroFields = []string{"name", "uniqueId", "isOn", "location", "isp", "allowIPs", "status", "state", "groupIds"}
+

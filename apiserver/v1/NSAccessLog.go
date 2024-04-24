@@ -34,3 +34,5 @@ type NSAccessLogList struct {
 	metav1.ListMeta `json:",inline"`
 	Items []*NSAccessLog `json:"items"`
 }
+var NSAccessLogTableZeroFields = []string{"name", "requestId"}
+

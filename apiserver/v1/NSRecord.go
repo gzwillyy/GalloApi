@@ -48,3 +48,6 @@ type NSRecordList struct {
 	metav1.ListMeta `json:",inline"`
 	Items           []*NSRecord `json:"items"`
 }
+
+var NSRecordTableZeroFields = []string{"name", "description", "type", "value", "routeIds", "healthCheck", "state"}
+

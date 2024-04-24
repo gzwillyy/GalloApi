@@ -12,7 +12,7 @@ const TableNameGalloIPLibrary = "galloIPLibraries"
 // IPLibrary IP库
 type IPLibrary struct {
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	AdminID           uint32 `gorm:"column:adminId;comment:管理员ID" json:"adminId"`    // 管理员ID
+	AdminID           uint64 `gorm:"column:adminId;comment:管理员ID" json:"adminId"`    // 管理员ID
 	FileID            uint32 `gorm:"column:fileId;comment:文件ID" json:"fileId"`       // 文件ID
 	Type              string `gorm:"column:type;comment:类型" json:"type"`             // 类型
 	IsPublic          bool   `gorm:"column:isPublic;comment:是否公用" json:"isPublic"`   // 是否公用
@@ -33,3 +33,5 @@ type IPLibraryList struct {
 	metav1.ListMeta `json:",inline"`
 	Items           []*IPLibrary `json:"items"`
 }
+
+var IPLibraryTableZeroFields = []string{"name", "isPublic", "state"}

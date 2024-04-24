@@ -24,11 +24,11 @@ type APINode struct {
 	RestHTTPS         string `gorm:"column:restHTTPS;comment:REST HTTPS配置" json:"restHTTPS"` // REST HTTPS配置
 	AccessAddrs       string `gorm:"column:accessAddrs;comment:外部访问地址" json:"accessAddrs"`   // 外部访问地址
 	Order             uint8  `gorm:"column:order;comment:排序" json:"order"`                   // 排序
-	State             int    `gorm:"column:state;default:1;comment:状态" json:"state"`         // 状态
-	AdminID           uint32 `gorm:"column:adminId;comment:管理员ID" json:"adminId"`            // 管理员ID
+	State             bool   `gorm:"column:state;default:1;comment:状态" json:"state"`         // 状态
+	AdminID           uint64 `gorm:"column:adminId;comment:管理员ID" json:"adminId"`            // 管理员ID
 	Weight            uint32 `gorm:"column:weight;comment:权重" json:"weight"`                 // 权重
 	Status            string `gorm:"column:status;comment:运行状态" json:"status"`               // 运行状态
-	IsPrimary         uint8  `gorm:"column:isPrimary;comment:是否为主API节点" json:"isPrimary"`    // 是否为主API节点
+	IsPrimary         bool   `gorm:"column:isPrimary;comment:是否为主API节点" json:"isPrimary"`    // 是否为主API节点
 }
 
 // TableName APINode's table name
@@ -38,10 +38,12 @@ func (*APINode) TableName() string {
 
 // AfterCreate run after create database record.
 func (u *APINode) AfterCreate(tx *gorm.DB) error {
-	return tx.Model(u).UpdateColumn("instanceID", idutil.GetInstanceID(u.ID, "node-")).Error
+	return tx.Model(u).UpdateColumn("instanceID", idutil.GetInstanceID(u.ID, "node-")).UpdateColumn("secret", idutil.NewSecretID()).UpdateColumn("uniqueId", idutil.NewSecretKey()).Error
 }
 
 type APINodeList struct {
 	metav1.ListMeta `json:",inline"`
 	Items           []*APINode `json:"items"`
 }
+
+var APINodeTableZeroFields = []string{"name", "isOn", "description", "http", "https", "restHTTPS", "accessAddrs", "status", "isPrimary"}

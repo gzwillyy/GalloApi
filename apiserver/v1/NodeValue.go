@@ -36,3 +36,5 @@ type NodeValueList struct {
 	metav1.ListMeta `json:",inline"`
 	Items []*NodeValue `json:"items"`
 }
+var NodeValueTableZeroFields = []string{"name", "item", "value", "day", "hour", "minute"}
+

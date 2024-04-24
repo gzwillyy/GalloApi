@@ -38,3 +38,5 @@ type ReportResultList struct {
 	metav1.ListMeta `json:",inline"`
 	Items []*ReportResult `json:"items"`
 }
+var ReportResultTableZeroFields = []string{"name", "type", "level", "error"}
+

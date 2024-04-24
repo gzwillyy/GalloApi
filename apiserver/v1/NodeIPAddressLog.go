@@ -13,7 +13,7 @@ const TableNameNodeIPAddressLog = "galloNodeIPAddressLogs"
 type NodeIPAddressLog struct {
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	AddressID         uint32 `gorm:"column:addressId;comment:地址ID" json:"addressId"`   // 地址ID
-	AdminID           uint32 `gorm:"column:adminId;comment:管理员ID" json:"adminId"`      // 管理员ID
+	AdminID           uint64 `gorm:"column:adminId;comment:管理员ID" json:"adminId"`      // 管理员ID
 	Description       string `gorm:"column:description;comment:描述" json:"description"` // 描述
 	IsUp              uint32 `gorm:"column:isUp;comment:是否在线" json:"isUp"`             // 是否在线
 	IsOn              bool   `gorm:"column:isOn;comment:是否启用" json:"isOn"`             // 是否启用
@@ -36,3 +36,5 @@ type NodeIPAddressLogList struct {
 	metav1.ListMeta `json:",inline"`
 	Items           []*NodeIPAddressLog `json:"items"`
 }
+
+var NodeIPAddressLogTableZeroFields = []string{"name", "isOn", "day", "backupIP"}

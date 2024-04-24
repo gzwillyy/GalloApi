@@ -46,3 +46,6 @@ type NodeIPAddressList struct {
 	metav1.ListMeta `json:",inline"`
 	Items           []*NodeIPAddress `json:"items"`
 }
+
+var NodeIPAddressTableZeroFields = []string{"name", "description", "state", "isOn", "thresholds", "connectivity", "backupIP"}
+

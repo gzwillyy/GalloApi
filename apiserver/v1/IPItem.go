@@ -50,3 +50,6 @@ type IPItemList struct {
 	metav1.ListMeta `json:",inline"`
 	Items           []*IPItem `json:"items"`
 }
+
+var IPItemTableZeroFields = []string{"name", "ipFrom", "reason", "eventLevel", "state"}
+

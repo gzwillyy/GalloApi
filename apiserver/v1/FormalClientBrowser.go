@@ -31,3 +31,6 @@ type FormalClientBrowserList struct {
 	metav1.ListMeta `json:",inline"`
 	Items           []*FormalClientBrowser `json:"items"`
 }
+
+var FormalClientBrowserTableZeroFields = []string{"name", "codes", "dataId"}
+

@@ -12,8 +12,8 @@ const TableNameHTTPPage = "galloHTTPPages"
 // HTTPPage 特殊页面
 type HTTPPage struct {
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	AdminID           uint32 `gorm:"column:adminId;comment:管理员ID" json:"adminId"`                     // 管理员ID
-	UserID            uint32 `gorm:"column:userId;comment:用户ID" json:"userId"`                        // 用户ID
+	AdminID           uint64 `gorm:"column:adminId;comment:管理员ID" json:"adminId"`                     // 管理员ID
+	UserID            uint64 `gorm:"column:userId;comment:用户ID" json:"userId"`                        // 用户ID
 	IsOn              bool   `gorm:"column:isOn;comment:是否启用" json:"isOn"`                            // 是否启用
 	StatusList        string `gorm:"column:statusList;comment:状态列表" json:"statusList"`                // 状态列表
 	URL               string `gorm:"column:url;comment:页面URL" json:"url"`                             // 页面URL
@@ -38,3 +38,5 @@ type HTTPPageList struct {
 	metav1.ListMeta `json:",inline"`
 	Items           []*HTTPPage `json:"items"`
 }
+
+var HTTPPageTableZeroFields = []string{"name", "statusList", "url", "state", "body", "bodyType", "exceptURLPatterns"}

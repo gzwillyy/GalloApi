@@ -55,3 +55,6 @@ type UpdateNodeGroupRequest struct {
 type DeleteNodeGroupRequest struct {
 	InstanceID string `json:"instanceID"`
 }
+
+var NodeGroupTableZeroFields = []string{"name", "state"}
+

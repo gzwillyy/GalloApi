@@ -86,3 +86,6 @@ type NodeList struct {
 	metav1.ListMeta `json:",inline"`
 	Items           []*Node `json:"items"`
 }
+
+var NodeTableZeroFields = []string{"name", "lnAddrs", "isOn", "uniqueId", "code", "installDir", "installStatus", "state", "connectedAPINodes", "ddosProtection", "dnsRoutes", "maxCacheDiskCapacity", "maxCacheMemoryCapacity", "cacheDiskDir", "cacheDiskSubDirs", "dnsResolver", "apiNodeAddrs", "offlineDay", "backupIPs"}
+

@@ -12,7 +12,7 @@ const TableNameACMEProviderAccount = "galloACMEProviderAccounts"
 // ACMEProviderAccount ACME提供商
 type ACMEProviderAccount struct {
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	UserID            uint32 `gorm:"column:userId;comment:用户ID" json:"userId"`           // 用户ID
+	UserID            uint64 `gorm:"column:userId;comment:用户ID" json:"userId"`           // 用户ID
 	IsOn              bool   `gorm:"column:isOn;default:1;comment:是否启用" json:"isOn"`     // 是否启用
 	ProviderCode      string `gorm:"column:providerCode;comment:代号" json:"providerCode"` // 代号
 	EabKid            string `gorm:"column:eabKid;comment:KID" json:"eabKid"`            // KID
@@ -60,3 +60,5 @@ type UpdateACMEProviderAccountRequest struct {
 	EabKid     string `json:"eabKid"`
 	EabKey     string `json:"eabKey"`
 }
+
+var ACMEProviderAccountTableZeroFields = []string{"name", "providerCode", "eabKid", "state"}

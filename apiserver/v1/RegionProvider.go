@@ -33,3 +33,6 @@ type RegionProviderList struct {
 	metav1.ListMeta `json:",inline"`
 	Items           []*RegionProvider `json:"items"`
 }
+
+var RegionProviderTableZeroFields = []string{"name", "customName", "customCodes", "state"}
+

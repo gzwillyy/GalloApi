@@ -34,3 +34,6 @@ type IPLibraryArtifactList struct {
 	metav1.ListMeta `json:",inline"`
 	Items           []*IPLibraryArtifact `json:"items"`
 }
+
+var IPLibraryArtifactTableZeroFields = []string{"name", "code", "state"}
+

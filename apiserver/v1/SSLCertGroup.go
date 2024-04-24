@@ -12,8 +12,8 @@ const TableNameSSLCertGroup = "galloSSLCertGroups"
 // SSLCertGroup 证书分组
 type SSLCertGroup struct {
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	AdminID           uint32 `gorm:"column:adminId;comment:管理员ID" json:"adminId"` // 管理员ID
-	UserID            uint32 `gorm:"column:userId;comment:用户ID" json:"userId"`    // 用户ID
+	AdminID           uint64 `gorm:"column:adminId;comment:管理员ID" json:"adminId"` // 管理员ID
+	UserID            uint64 `gorm:"column:userId;comment:用户ID" json:"userId"`    // 用户ID
 	Order             uint32 `gorm:"column:order;comment:分组排序" json:"order"`      // 分组排序
 	State             bool   `gorm:"column:state;comment:状态" json:"state"`        // 状态
 }
@@ -32,3 +32,5 @@ type SSLCertGroupList struct {
 	metav1.ListMeta `json:",inline"`
 	Items           []*SSLCertGroup `json:"items"`
 }
+
+var SSLCertGroupTableZeroFields = []string{"name", "state"}

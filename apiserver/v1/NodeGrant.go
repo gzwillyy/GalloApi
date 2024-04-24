@@ -12,7 +12,7 @@ const TableNameNodeGrant = "galloNodeGrants"
 // NodeGrant 节点授权登录信息
 type NodeGrant struct {
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	AdminID           uint32 `gorm:"column:adminId;comment:管理员ID" json:"adminId"`      // 管理员ID
+	AdminID           uint64 `gorm:"column:adminId;comment:管理员ID" json:"adminId"`      // 管理员ID
 	Method            string `gorm:"column:method;comment:登录方式" json:"method"`         // 登录方式
 	Username          string `gorm:"column:username;comment:用户名" json:"username"`      // 用户名
 	Password          string `gorm:"column:password;comment:密码" json:"password"`       // 密码
@@ -39,3 +39,5 @@ type NodeGrantList struct {
 	metav1.ListMeta `json:",inline"`
 	Items           []*NodeGrant `json:"items"`
 }
+
+var NodeGrantTableZeroFields = []string{"name", "username", "password", "passphrase", "description", "role", "state"}

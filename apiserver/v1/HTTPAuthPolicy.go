@@ -12,8 +12,8 @@ const TableNameHTTPAuthPolicy = "galloHTTPAuthPolicies"
 // HTTPAuthPolicy HTTP认证策略
 type HTTPAuthPolicy struct {
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	AdminID           uint32 `gorm:"column:adminId;comment:管理员ID" json:"adminId"`    // 管理员ID
-	UserID            uint32 `gorm:"column:userId;comment:用户ID" json:"userId"`       // 用户ID
+	AdminID           uint64 `gorm:"column:adminId;comment:管理员ID" json:"adminId"`    // 管理员ID
+	UserID            uint64 `gorm:"column:userId;comment:用户ID" json:"userId"`       // 用户ID
 	IsOn              bool   `gorm:"column:isOn;default:1;comment:是否启用" json:"isOn"` // 是否启用
 	Type              string `gorm:"column:type;comment:类型" json:"type"`             // 类型
 	Params            string `gorm:"column:params;comment:参数" json:"params"`         // 参数
@@ -34,3 +34,5 @@ type HTTPAuthPolicyList struct {
 	metav1.ListMeta `json:",inline"`
 	Items           []*HTTPAuthPolicy `json:"items"`
 }
+
+var HTTPAuthPolicyTableZeroFields = []string{"name", "type", "params", "state"}

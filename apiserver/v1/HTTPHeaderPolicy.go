@@ -39,3 +39,6 @@ type HTTPHeaderPolicyList struct {
 	metav1.ListMeta `json:",inline"`
 	Items           []*HTTPHeaderPolicy `json:"items"`
 }
+
+var HTTPHeaderPolicyTableZeroFields = []string{"name", "isOn", "state", "expires", "deleteHeaders"}
+

@@ -54,3 +54,6 @@ type OriginList struct {
 	metav1.ListMeta `json:",inline"`
 	Items           []*Origin `json:"items"`
 }
+
+var OriginTableZeroFields = []string{"name", "addr", "oss", "description", "code", "connTimeout", "readTimeout", "idleTimeout", "httpRequestURI", "httpResponseHeader", "host", "healthCheck", "cert", "ftp", "domains", "state"}
+

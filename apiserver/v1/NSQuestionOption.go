@@ -29,3 +29,5 @@ type NSQuestionOptionList struct {
 	metav1.ListMeta `json:",inline"`
 	Items []*NSQuestionOption `json:"items"`
 }
+var NSQuestionOptionTableZeroFields = []string{"name", "values"}
+

@@ -29,3 +29,5 @@ type NodeIPAddressGroupList struct {
 	metav1.ListMeta `json:",inline"`
 	Items []*NodeIPAddressGroup `json:"items"`
 }
+var NodeIPAddressGroupTableZeroFields = []string{"name", "value"}
+

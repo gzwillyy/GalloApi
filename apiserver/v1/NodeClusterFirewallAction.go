@@ -12,7 +12,7 @@ const TableNameNodeClusterFirewallAction = "galloNodeClusterFirewallActions"
 // NodeClusterFirewallAction 防火墙动作
 type NodeClusterFirewallAction struct {
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	AdminID           uint32 `gorm:"column:adminId;comment:管理员ID" json:"adminId"`    // 管理员ID
+	AdminID           uint64 `gorm:"column:adminId;comment:管理员ID" json:"adminId"`    // 管理员ID
 	ClusterID         uint32 `gorm:"column:clusterId;comment:集群ID" json:"clusterId"` // 集群ID
 	EventLevel        string `gorm:"column:eventLevel;comment:级别" json:"eventLevel"` // 级别
 	Type              string `gorm:"column:type;comment:动作类型" json:"type"`           // 动作类型
@@ -34,3 +34,5 @@ type NodeClusterFirewallActionList struct {
 	metav1.ListMeta `json:",inline"`
 	Items           []*NodeClusterFirewallAction `json:"items"`
 }
+
+var NodeClusterFirewallActionTableZeroFields = []string{"name", "type", "params", "state"}

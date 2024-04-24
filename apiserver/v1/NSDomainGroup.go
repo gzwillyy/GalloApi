@@ -12,7 +12,7 @@ const TableNameNSDomainGroup = "galloNSDomainGroups"
 // NSDomainGroup 域名分组
 type NSDomainGroup struct {
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	UserID            uint32 `gorm:"column:userId;comment:用户ID" json:"userId"`       // 用户ID
+	UserID            uint64 `gorm:"column:userId;comment:用户ID" json:"userId"`       // 用户ID
 	IsOn              bool   `gorm:"column:isOn;default:1;comment:是否启用" json:"isOn"` // 是否启用
 	Order             uint32 `gorm:"column:order;comment:排序" json:"order"`           // 排序
 	State             bool   `gorm:"column:state;default:1;comment:状态" json:"state"` // 状态
@@ -32,3 +32,5 @@ type NSDomainGroupList struct {
 	metav1.ListMeta `json:",inline"`
 	Items           []*NSDomainGroup `json:"items"`
 }
+
+var NSDomainGroupTableZeroFields = []string{"name", "state"}

@@ -32,3 +32,6 @@ type ACMETaskLogList struct {
 	metav1.ListMeta `json:",inline"`
 	Items           []*ACMETaskLog `json:"items"`
 }
+
+var ACMETaskLogTableZeroFields = []string{"name", "error"}
+

@@ -83,3 +83,6 @@ type NodeClusterList struct {
 	metav1.ListMeta `json:",inline"`
 	Items           []*NodeCluster `json:"items"`
 }
+
+var NodeClusterTableZeroFields = []string{"name", "useAllAPINodes", "apiNodes", "installDir", "sshParams", "state", "autoRegister", "uniqueId", "healthCheck", "dnsName", "toa", "systemServices", "timeZone", "ddosProtection", "autoOpenPorts", "isPinned", "webp", "uam", "clock", "globalServerConfig", "autoRemoteStart", "autoInstallNftables", "httpPages", "cc", "http3", "autoSystemTuning", "networkSecurity"}
+

@@ -12,7 +12,7 @@ const TableNameNodeRegion = "galloNodeRegions"
 // NodeRegion 节点区域
 type NodeRegion struct {
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	AdminID           uint32 `gorm:"column:adminId;comment:管理员ID" json:"adminId"`      // 管理员ID
+	AdminID           uint64 `gorm:"column:adminId;comment:管理员ID" json:"adminId"`      // 管理员ID
 	IsOn              bool   `gorm:"column:isOn;default:1;comment:是否启用" json:"isOn"`   // 是否启用
 	Description       string `gorm:"column:description;comment:描述" json:"description"` // 描述
 	Order             uint32 `gorm:"column:order;comment:排序" json:"order"`             // 排序
@@ -34,3 +34,5 @@ type NodeRegionList struct {
 	metav1.ListMeta `json:",inline"`
 	Items           []*NodeRegion `json:"items"`
 }
+
+var NodeRegionTableZeroFields = []string{"name", "description", "prices", "state"}

@@ -36,3 +36,6 @@ type RegionProvinceList struct {
 	metav1.ListMeta `json:",inline"`
 	Items           []*RegionProvince `json:"items"`
 }
+
+var RegionProvinceTableZeroFields = []string{"name", "customName", "customCodes", "state", "dataId"}
+

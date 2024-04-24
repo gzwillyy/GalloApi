@@ -38,3 +38,5 @@ type NodeTrafficHourlyStatList struct {
 	metav1.ListMeta `json:",inline"`
 	Items []*NodeTrafficHourlyStat `json:"items"`
 }
+var NodeTrafficHourlyStatTableZeroFields = []string{"name", "role"}
+

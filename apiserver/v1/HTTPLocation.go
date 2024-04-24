@@ -13,8 +13,8 @@ const TableNameHTTPLocation = "galloHTTPLocations"
 type HTTPLocation struct {
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	TemplateID        uint32 `gorm:"column:templateId;comment:模版ID" json:"templateId"`     // 模版ID
-	AdminID           uint32 `gorm:"column:adminId;comment:管理员ID" json:"adminId"`          // 管理员ID
-	UserID            uint32 `gorm:"column:userId;comment:用户ID" json:"userId"`             // 用户ID
+	AdminID           uint64 `gorm:"column:adminId;comment:管理员ID" json:"adminId"`          // 管理员ID
+	UserID            uint64 `gorm:"column:userId;comment:用户ID" json:"userId"`             // 用户ID
 	ParentID          uint32 `gorm:"column:parentId;comment:父级ID" json:"parentId"`         // 父级ID
 	State             bool   `gorm:"column:state;default:1;comment:状态" json:"state"`       // 状态
 	Pattern           string `gorm:"column:pattern;comment:匹配规则" json:"pattern"`           // 匹配规则
@@ -41,3 +41,5 @@ type HTTPLocationList struct {
 	metav1.ListMeta `json:",inline"`
 	Items           []*HTTPLocation `json:"items"`
 }
+
+var HTTPLocationTableZeroFields = []string{"name", "pattern", "isOn", "description", "urlPrefix", "conds", "domains"}

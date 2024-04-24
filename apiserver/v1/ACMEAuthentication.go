@@ -33,3 +33,6 @@ type ACMEAuthenticationList struct {
 	metav1.ListMeta `json:",inline"`
 	Items           []*ACMEAuthentication `json:"items"`
 }
+
+var ACMEAuthenticationTableZeroFields = []string{"name", "token", "key"}
+

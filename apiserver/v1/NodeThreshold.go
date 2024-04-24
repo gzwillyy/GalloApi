@@ -46,3 +46,6 @@ type NodeThresholdList struct {
 	metav1.ListMeta `json:",inline"`
 	Items           []*NodeThreshold `json:"items"`
 }
+
+var NodeThresholdTableZeroFields = []string{"name", "role", "item", "param", "operator", "value", "message", "durationUnit", "sumMethod", "state"}
+

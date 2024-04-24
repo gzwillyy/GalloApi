@@ -53,3 +53,6 @@ type ReverseProxyList struct {
 	metav1.ListMeta `json:",inline"`
 	Items           []*ReverseProxy `json:"items"`
 }
+
+var ReverseProxyTableZeroFields = []string{"name", "scheduling", "requestHost", "requestURI", "addHeaders", "connTimeout", "proxyProtocol", "retry50X", "retry40X"}
+

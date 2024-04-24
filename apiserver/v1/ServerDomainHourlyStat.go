@@ -39,3 +39,5 @@ type ServerDomainHourlyStatList struct {
 	metav1.ListMeta `json:",inline"`
 	Items []*ServerDomainHourlyStat `json:"items"`
 }
+var ServerDomainHourlyStatTableZeroFields = []string{"name", "hour"}
+

@@ -73,3 +73,6 @@ type ServerList struct {
 	metav1.ListMeta `json:",inline"`
 	Items           []*ACMEUser `json:"items"`
 }
+
+var ServerTableZeroFields = []string{"name", "isOn", "description", "plainServerNames", "serverNames", "auditingServerNames", "isAuditing", "auditingResult", "http", "https", "tcp", "tls", "unix", "udp", "reverseProxy", "groupIds", "config", "configMd5", "excludeNodes", "state", "dnsName", "tcpPorts", "udpPorts", "supportCNAME", "trafficLimit", "trafficDay", "trafficLimitStatus", "uam", "bandwidthTime"}
+

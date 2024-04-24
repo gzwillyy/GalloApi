@@ -31,3 +31,5 @@ type FormalClientSystemList struct {
 	metav1.ListMeta `json:",inline"`
 	Items           []*FormalClientSystem `json:"items"`
 }
+
+var FormalClientSystemTableZeroFields = []string{"name", "codes", "dataId"}
